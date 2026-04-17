@@ -1,1 +1,17 @@
+- [x] Create README.md page
+- [x] Have a previous coding project to reference
+- [x] Test reference repository to learn how they did everything
+- [x] Their code was very good I liked the way they included an excel spreadsheet which I had not thought of. I did think the graphical interface could look better so I may try and improve that if I can.
+- [ ] Decide what things I will implement from reference repository and what I may change
+- [ ] Do research for other coding projects related to mine
+- [ ] Set all tasks I want to complete
+- [ ] Divide my work into sprints
+- [ ] Watch youtube videos or other research to learn about code that I do not know yet
+- [ ] Complete sprint 1
+- [ ] Use comments during code
+- [ ] Review sprint 1 and make any adjustments needed for sprint 2 
+- [ ] Complete sprint 2 
+- [ ] Review sprint 2 and make any adjustments needed for sprint 3
+- [ ] Complete sprint 3
+- [ ] Adjust code description and make any changes depending on the actual final product of the code
 
