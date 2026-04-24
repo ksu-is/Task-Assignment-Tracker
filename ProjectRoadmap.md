@@ -2,11 +2,17 @@
 - [x] Have a previous coding project to reference
 - [x] Test reference repository to learn how they did everything
 - [x] Their code was very good I liked the way they included an excel spreadsheet which I had not thought of. I did think the graphical interface could look better so I may try and improve that if I can.
-- [ ] Decide what things I will implement from reference repository and what I may change
-- [ ] Do research for other coding projects related to mine
-- [ ] Set all tasks I want to complete
-- [ ] Divide my work into sprints
-- [ ] Watch youtube videos or other research to learn about code that I do not know yet
+- [x] Decide what things I will implement from reference repository and what I may change
+- [x] Do research for other coding projects related to mine
+- [x] Set all tasks I want to complete
+- [x] Divide my work into sprints
+- [x] First sprint plans to be building the window and form for my code
+- [x] Second sprint plans to connect it to excel like my reference repository did so that all of the assignments are saved somewhere.
+- [x] The main change for the excel spreadsheet compared to my reference repository is I plan to format the spreadsheet to look much better.
+- [x] Watch youtube videos or other research to learn about code that I do not know yet
+- [x] Add youtube links to README.md file for future reference
+- [x] Complete the basics of the window
+- [ ] Add extra features to improve the user experience
 - [ ] Complete sprint 1
 - [ ] Use comments during code
 - [ ] Review sprint 1 and make any adjustments needed for sprint 2 
