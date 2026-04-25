@@ -7,6 +7,9 @@ window = tk.Tk()
 window.title("Task/Assignment Tracker")
 window.geometry("500x720")
 
+# Counter variable to keep track of the number of assignments added
+counter = 0
+
 #Title at the top of the window
 title_label = tk.Label(window, text="Task/Assignment Tracker", font=("Arial", 20, "bold"))
 title_label.pack(pady=20)
@@ -47,8 +50,11 @@ notes_label.pack()
 notes_entry = tk.Entry(window, font=("Arial", 12), width=30)
 notes_entry.pack(pady=5)
 
+
 # Submit function
 def submit():
+    global counter
+
     name = name_entry.get()
     class_name = class_entry.get()
     due = due_entry.get()
@@ -68,6 +74,13 @@ def submit():
         priority_box.set("")
         type_box.set("")
         notes_entry.delete(0, tk.END)
+        # Increment the counter and update the label
+        counter += 1
+        counter_label.config(text=f"Assignments Added: {counter}")
+
+# Counter label
+counter_label = tk.Label(window, text=f"Assignments Added: 0", font=("Arial", 11), fg="gray")
+counter_label.pack(pady=5)
 
 # Submit button
 submit_button = tk.Button(window, text="Submit", font=("Arial", 12, "bold"), command=submit)
