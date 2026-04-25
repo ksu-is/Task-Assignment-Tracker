@@ -54,6 +54,12 @@ def submit():
         messagebox.showerror("Error", "Please fill in all fields.")
     else:
         messagebox.showinfo("Success", f"Added: {name}\nNotes: {notes if notes else 'None'}")
+        # Clear the fields after submission
+        name_entry.delete(0, tk.END)
+        class_entry.delete(0, tk.END)
+        due_entry.delete(0, tk.END)
+        priority_box.set("")
+        notes_entry.delete(0, tk.END)
 
 # Submit button
 submit_button = tk.Button(window, text="Submit", font=("Arial", 12, "bold"), command=submit)
