@@ -5,7 +5,7 @@ from tkinter import messagebox
 # Create the main application window
 window = tk.Tk()
 window.title("Task/Assignment Tracker")
-window.geometry("500x600")
+window.geometry("500x720")
 
 #Title at the top of the window
 title_label = tk.Label(window, text="Task/Assignment Tracker", font=("Arial", 20, "bold"))
@@ -29,6 +29,12 @@ due_label.pack()
 due_entry = tk.Entry(window, font=("Arial", 12), width=30)
 due_entry.pack(pady=5)
 
+#Type of assignment dropdown
+type_label = tk.Label(window, text="Assignment Type:", font=("Arial", 12))
+type_label.pack()
+type_box = ttk.Combobox(window, values=["Homework", "Quiz", "Exam", "Project", "Lab", "Paper", "Reading", "Other"], font=("Arial", 12), width=28, state="readonly")
+type_box.pack(pady=5)
+
 # Priority dropdown
 priority_label = tk.Label(window, text="Priority:", font=("Arial", 12))
 priority_label.pack()
@@ -48,17 +54,19 @@ def submit():
     due = due_entry.get()
     priority = priority_box.get()
     notes = notes_entry.get()
+    type_name = type_box.get()
 
     # Make sure nothing is empty
-    if name == "" or class_name == "" or due == "" or priority == "":
+    if name == "" or class_name == "" or due == "" or priority == "" or type_name == "":
         messagebox.showerror("Error", "Please fill in all fields.")
     else:
-        messagebox.showinfo("Success", f"Added: {name}\nNotes: {notes if notes else 'None'}")
+        messagebox.showinfo("Success", f"Added: {name}\nType: {type_name}\nNotes: {notes if notes else 'None'}")
         # Clear the fields after submission
         name_entry.delete(0, tk.END)
         class_entry.delete(0, tk.END)
         due_entry.delete(0, tk.END)
         priority_box.set("")
+        type_box.set("")
         notes_entry.delete(0, tk.END)
 
 # Submit button
