@@ -10,6 +10,24 @@ window.geometry("500x720")
 # Counter variable to keep track of the number of assignments added
 counter = 0
 
+# Creating a placeholder text for the entry fields
+def add_placeholder(entry, placeholder_text):
+    entry.insert(0, placeholder_text)
+    entry.config(fg='gray')
+
+    def on_click(event):
+        if entry.get() == placeholder_text:
+            entry.delete(0, tk.END)
+            entry.config(fg='black')
+
+    def on_leave(event):
+        if entry.get() == '':
+            entry.insert(0, placeholder_text)
+            entry.config(fg='gray')
+
+    entry.bind("<FocusIn>", on_click)
+    entry.bind("<FocusOut>", on_leave)
+
 #Title at the top of the window
 title_label = tk.Label(window, text="Task/Assignment Tracker", font=("Arial", 20, "bold"))
 title_label.pack(pady=20)
@@ -19,18 +37,21 @@ name_label = tk.Label(window, text="Assignment Name:", font=("Arial", 12))
 name_label.pack()
 name_entry = tk.Entry(window, font=("Arial", 12), width=30)
 name_entry.pack(pady=5)
+add_placeholder(name_entry, "e.g. Math Homework 5")
 
 # Class
 class_label = tk.Label(window, text="Class:", font=("Arial", 12))
 class_label.pack()
 class_entry = tk.Entry(window, font=("Arial", 12), width=30)
 class_entry.pack(pady=5)
+add_placeholder(class_entry, "e.g. Math 101")
 
 # Due date
 due_label = tk.Label(window, text="Due Date (MM/DD/YYYY):", font=("Arial", 12))
 due_label.pack()
 due_entry = tk.Entry(window, font=("Arial", 12), width=30)
 due_entry.pack(pady=5)
+add_placeholder(due_entry, "e.g. 4/27/2026")
 
 #Type of assignment dropdown
 type_label = tk.Label(window, text="Assignment Type:", font=("Arial", 12))
@@ -49,7 +70,7 @@ notes_label = tk.Label(window, text="Notes (Optional):", font=("Arial", 12))
 notes_label.pack()
 notes_entry = tk.Entry(window, font=("Arial", 12), width=30)
 notes_entry.pack(pady=5)
-
+add_placeholder(notes_entry, "e.g. Chapters 5-7")
 
 # Submit function
 def submit():
@@ -60,10 +81,12 @@ def submit():
     due = due_entry.get()
     priority = priority_box.get()
     notes = notes_entry.get()
+    if notes == "e.g. Chapters 5-7":
+        notes = ""
     type_name = type_box.get()
 
     # Make sure nothing is empty
-    if name == "" or class_name == "" or due == "" or priority == "" or type_name == "":
+    if name == "" or name == "e.g. Math Homework 5" or class_name == "" or class_name == "e.g. Math 101" or due == "" or due == "e.g. 4/27/2026" or priority == "" or type_name == "":
         messagebox.showerror("Error", "Please fill in all fields.")
     else:
         messagebox.showinfo("Success", f"Added: {name}\nType: {type_name}\nNotes: {notes if notes else 'None'}")
