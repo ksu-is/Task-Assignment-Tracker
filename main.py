@@ -28,6 +28,36 @@ def add_placeholder(entry, placeholder_text):
     entry.bind("<FocusIn>", on_click)
     entry.bind("<FocusOut>", on_leave)
 
+# Create a function to make sure the date is valid
+def is_valid_date(date_str):
+    # Check it's not empty or placeholder
+    if date_str == "" or date_str == "e.g. 4/27/2026":
+        return False
+
+    # Split by "/" and check we get exactly 3 parts
+    parts = date_str.split("/")
+    if len(parts) != 3:
+        return False
+
+    # Check each part is a number
+    for part in parts:
+        if not part.isdigit():
+            return False
+
+    # Pull out month, day, year
+    month = int(parts[0])
+    day   = int(parts[1])
+    year  = int(parts[2])
+
+    # Check ranges make sense
+    if month < 1 or month > 12:
+        return False
+    if day < 1 or day > 31:
+        return False
+    if year < 2000 or year > 2100:
+        return False
+
+    return True
 #Title at the top of the window
 title_label = tk.Label(window, text="Task/Assignment Tracker", font=("Arial", 20, "bold"))
 title_label.pack(pady=20)
@@ -88,6 +118,8 @@ def submit():
     # Make sure nothing is empty
     if name == "" or name == "e.g. Math Homework 5" or class_name == "" or class_name == "e.g. Math 101" or due == "" or due == "e.g. 4/27/2026" or priority == "" or type_name == "":
         messagebox.showerror("Error", "Please fill in all fields.")
+    elif not is_valid_date(due):
+        messagebox.showerror("Invalid Date", "Please enter a valid date in MM/DD/YYYY format.")
     else:
         messagebox.showinfo("Success", f"Added: {name}\nType: {type_name}\nNotes: {notes if notes else 'None'}")
         # Clear the fields after submission
