@@ -6,6 +6,7 @@ from tkinter import messagebox
 window = tk.Tk()
 window.title("Task/Assignment Tracker")
 window.geometry("500x720")
+window.configure(bg="#1e1e2e")
 
 # Counter variable to keep track of the number of assignments added
 counter = 0
@@ -13,17 +14,17 @@ counter = 0
 # Creating a placeholder text for the entry fields
 def add_placeholder(entry, placeholder_text):
     entry.insert(0, placeholder_text)
-    entry.config(fg='gray')
+    entry.config(fg='#888888')
 
     def on_click(event):
         if entry.get() == placeholder_text:
             entry.delete(0, tk.END)
-            entry.config(fg='black')
+            entry.config(fg='white')
 
     def on_leave(event):
         if entry.get() == '':
             entry.insert(0, placeholder_text)
-            entry.config(fg='gray')
+            entry.config(fg='#888888')
 
     entry.bind("<FocusIn>", on_click)
     entry.bind("<FocusOut>", on_leave)
@@ -59,46 +60,46 @@ def is_valid_date(date_str):
 
     return True
 #Title at the top of the window
-title_label = tk.Label(window, text="Task/Assignment Tracker", font=("Arial", 20, "bold"))
+title_label = tk.Label(window, text="Task/Assignment Tracker", font=("Arial", 20, "bold"), bg="#1e1e2e", fg="#6c9FFF")
 title_label.pack(pady=20)
 
 # Assignment name
-name_label = tk.Label(window, text="Assignment Name:", font=("Arial", 12))
+name_label = tk.Label(window, text="Assignment Name:", font=("Arial", 12), bg="#1e1e2e", fg="white")
 name_label.pack()
-name_entry = tk.Entry(window, font=("Arial", 12), width=30)
+name_entry = tk.Entry(window, font=("Arial", 12), width=30, bg="#2e2e3e", fg="white", insertbackground="white")
 name_entry.pack(pady=5)
 add_placeholder(name_entry, "e.g. Math Homework 5")
 
 # Class
-class_label = tk.Label(window, text="Class:", font=("Arial", 12))
+class_label = tk.Label(window, text="Class:", font=("Arial", 12), bg="#1e1e2e", fg="white")
 class_label.pack()
-class_entry = tk.Entry(window, font=("Arial", 12), width=30)
+class_entry = tk.Entry(window, font=("Arial", 12), width=30, bg="#2e2e3e", fg="white", insertbackground="white")
 class_entry.pack(pady=5)
 add_placeholder(class_entry, "e.g. Math 101")
 
 # Due date
-due_label = tk.Label(window, text="Due Date (MM/DD/YYYY):", font=("Arial", 12))
+due_label = tk.Label(window, text="Due Date (MM/DD/YYYY):", font=("Arial", 12), bg="#1e1e2e", fg="white")
 due_label.pack()
-due_entry = tk.Entry(window, font=("Arial", 12), width=30)
+due_entry = tk.Entry(window, font=("Arial", 12), width=30, bg="#2e2e3e", fg="white", insertbackground="white")
 due_entry.pack(pady=5)
 add_placeholder(due_entry, "e.g. 4/27/2026")
 
 #Type of assignment dropdown
-type_label = tk.Label(window, text="Assignment Type:", font=("Arial", 12))
+type_label = tk.Label(window, text="Assignment Type:", font=("Arial", 12), bg="#1e1e2e", fg="white")
 type_label.pack()
 type_box = ttk.Combobox(window, values=["Homework", "Quiz", "Exam", "Project", "Lab", "Paper", "Reading", "Other"], font=("Arial", 12), width=28, state="readonly")
 type_box.pack(pady=5)
 
 # Priority dropdown
-priority_label = tk.Label(window, text="Priority:", font=("Arial", 12))
+priority_label = tk.Label(window, text="Priority:", font=("Arial", 12), bg="#1e1e2e", fg="white")
 priority_label.pack()
 priority_box = ttk.Combobox(window, values=["Low", "Medium", "High"], font=("Arial", 12), width=28, state="readonly")
 priority_box.pack(pady=5)
 
 # Notes
-notes_label = tk.Label(window, text="Notes (Optional):", font=("Arial", 12))
+notes_label = tk.Label(window, text="Notes (Optional):", font=("Arial", 12), bg="#1e1e2e", fg="white")
 notes_label.pack()
-notes_entry = tk.Entry(window, font=("Arial", 12), width=30)
+notes_entry = tk.Entry(window, font=("Arial", 12), width=30, bg="#2e2e3e", fg="white", insertbackground="white")
 notes_entry.pack(pady=5)
 add_placeholder(notes_entry, "e.g. Chapters 5-7")
 
@@ -134,11 +135,11 @@ def submit():
         counter_label.config(text=f"Assignments Added: {counter}")
 
 # Counter label
-counter_label = tk.Label(window, text=f"Assignments Added: 0", font=("Arial", 11), fg="gray")
+counter_label = tk.Label(window, text=f"Assignments Added: 0", font=("Arial", 11), bg="#1e1e2e", fg="gray")
 counter_label.pack(pady=5)
 
 # Submit button
-submit_button = tk.Button(window, text="Submit", font=("Arial", 12, "bold"), command=submit)
+submit_button = tk.Button(window, text="Submit", font=("Arial", 12, "bold"), bg="#6c9FFF", fg="black", activebackground="#4a7fd4", activeforeground="white", relief="flat", padx=20, pady=8, command=submit)
 submit_button.pack(pady=20)
 
 # Start the window
