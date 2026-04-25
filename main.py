@@ -5,7 +5,7 @@ from tkinter import messagebox
 # Create the main application window
 window = tk.Tk()
 window.title("Task/Assignment Tracker")
-window.geometry("500x720")
+window.geometry("500x850")
 window.configure(bg="#1e1e2e")
 
 # Counter variable to keep track of the number of assignments added
@@ -123,6 +123,8 @@ def submit():
         messagebox.showerror("Invalid Date", "Please enter a valid date in MM/DD/YYYY format.")
     else:
         messagebox.showinfo("Success", f"Added: {name}\nType: {type_name}\nNotes: {notes if notes else 'None'}")
+        # Add the assignment to the listbox
+        assignment_list.insert(tk.END, f"{name} | {class_name} | {type_name} | Due: {due} | {priority}")
         # Clear the fields after submission
         name_entry.delete(0, tk.END)
         class_entry.delete(0, tk.END)
@@ -141,6 +143,25 @@ counter_label.pack(pady=5)
 # Submit button
 submit_button = tk.Button(window, text="Submit", font=("Arial", 12, "bold"), bg="#6c9FFF", fg="black", activebackground="#4a7fd4", activeforeground="white", relief="flat", padx=20, pady=8, command=submit)
 submit_button.pack(pady=20)
+
+# List to display added assignments
+list_label = tk.Label(window, text="Assignments This Session:", font=("Arial", 12, "bold"), bg="#1e1e2e", fg="white")
+list_label.pack(pady=(10, 0))
+
+# Frame to hold the listbox and scrollbar
+list_frame = tk.Frame(window, bg="#1e1e2e")
+list_frame.pack(pady=5)
+
+# Scrollbar for the listbox
+scrollbar = tk.Scrollbar(list_frame)
+scrollbar.pack(side="right", fill="y")
+
+# Listbox to display assignments
+assignment_list = tk.Listbox(list_frame, font=("Arial", 11), width=50, height=6, bg="#2e2e3e", fg="white", selectbackground="#6c9FFF", yscrollcommand=scrollbar.set, bd=0)
+assignment_list.pack(side="left")
+
+# Connect scrollbar to listbox
+scrollbar.config(command=assignment_list.yview)
 
 # Start the window
 window.mainloop()
