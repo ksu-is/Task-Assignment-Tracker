@@ -15,9 +15,9 @@
 - [x] Add extra features to improve the user experience
 - [x] Complete sprint 1
 - [x] Use comments during code
-- [ ] Review sprint 1 and make any adjustments needed for sprint 2 
-- [ ] Complete sprint 2 
-- [ ] As sprint 1 and sprint 2 make up the majority of the program, I will analyze both sprints to see what features can be improved or added in sprint 3
+- [x] Review sprint 1 and make any adjustments needed for sprint 2 
+- [x] Complete sprint 2 
+- [ ] Review sprint 2 and make any adjustments needed for sprint 3
 - [ ] Complete sprint 3
 - [ ] Adjust code description and make any changes depending on the actual final product of the code
 
