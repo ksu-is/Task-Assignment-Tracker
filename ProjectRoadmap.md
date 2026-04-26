@@ -12,12 +12,12 @@
 - [x] Watch youtube videos or other research to learn about code that I do not know yet
 - [x] Add youtube links to README.md file for future reference
 - [x] Complete the basics of the window
-- [ ] Add extra features to improve the user experience
-- [ ] Complete sprint 1
-- [ ] Use comments during code
+- [x] Add extra features to improve the user experience
+- [x] Complete sprint 1
+- [x] Use comments during code
 - [ ] Review sprint 1 and make any adjustments needed for sprint 2 
 - [ ] Complete sprint 2 
-- [ ] Review sprint 2 and make any adjustments needed for sprint 3
+- [ ] As sprint 1 and sprint 2 make up the majority of the program, I will analyze both sprints to see what features can be improved or added in sprint 3
 - [ ] Complete sprint 3
 - [ ] Adjust code description and make any changes depending on the actual final product of the code
 
