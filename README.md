@@ -6,4 +6,9 @@ This is a list of all the youtube videos I used to learn extra code to create th
     Labels and Buttons: https://www.youtube.com/watch?v=8VoTtF-CxrM 
     Entry Boxes: https://www.youtube.com/watch?v=ITaDE9LLEDY 
     Dropdown Menus: https://www.youtube.com/watch?v=dgoGt8O2McI 
+    Entry widget and get() method: https://www.youtube.com/watch?v=ITaDE9LLEDY 
+    Placeholder text and event binding: https://www.youtube.com/watch?v=dxQHSQBMrpQ 
+    Input validation and error messages: https://www.youtube.com/watch?v=yyDdQOEJVnk
+    Styling: https://www.youtube.com/watch?v=bKPqcTNsK9M 
+    Listbox and Scrollbar: https://www.youtube.com/watch?v=rbuTRlEpD44
     
