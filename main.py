@@ -2,15 +2,63 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 
+# Installing the ability to save assignments to excel file
+import openpyxl
+from openpyxl.styles import Font, PatternFill, Alignment
+
 # Create the main application window
 window = tk.Tk()
 window.title("Task/Assignment Tracker")
 window.geometry("500x850")
 window.configure(bg="#1e1e2e")
 
+# Create the function for saving assignments to an Excel file
+def setup_excel():
+    try:
+        # Try to open existing file
+        workbook = openpyxl.load_workbook("assignments.xlsx")
+        sheet = workbook.active
+    except FileNotFoundError:
+        # File does not exist yet so create it
+        workbook = openpyxl.Workbook()
+        sheet = workbook.active
+        sheet.title = "Assignments"
+
+        # Create header row
+        headers = ["Assignment Name", "Class", "Type", "Due Date", "Priority", "Notes"]
+
+        # Add headers to the first row
+        for col_num, header in enumerate(headers, 1):
+            cell = sheet.cell(row=1, column=col_num)
+            cell.value = header
+
+            # Make headers bold and white text
+            cell.font = Font(bold=True, color="FFFFFF")
+
+            # Blue background for headers
+            cell.fill = PatternFill("solid", fgColor="4472C4")
+
+            # Center the text
+            cell.alignment = Alignment(horizontal="center")
+        
+        # Set column widths so nothing gets cut off
+        sheet.column_dimensions['A'].width = 25
+        sheet.column_dimensions['B'].width = 15
+        sheet.column_dimensions['C'].width = 15
+        sheet.column_dimensions['D'].width = 15
+        sheet.column_dimensions['E'].width = 12
+        sheet.column_dimensions['F'].width = 25
+
+        # Freeze the top row so the headers stay visible while scrolling
+        sheet.freeze_panes = "A2"
+
+        workbook.save("assignments.xlsx")
+    return workbook, sheet
 # Counter variable to keep track of the number of assignments added
 counter = 0
 
+# Call the function to set up the Excel file and get the workbook and sheet objects
+workbook, sheet = setup_excel()
 # Creating a placeholder text for the entry fields
 def add_placeholder(entry, placeholder_text):
     entry.insert(0, placeholder_text)
