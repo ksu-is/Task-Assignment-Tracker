@@ -83,11 +83,38 @@ def save_to_excel(name, class_name, type_name, due, priority, notes):
     
     workbook.save("assignments.xlsx")
 
+# Create a function to load assignments from the Excel file and display them in the listbox when the application starts
+def load_assignments():
+    try:
+        workbook = openpyxl.load_workbook("assignments.xlsx")
+        sheet = workbook.active
+
+        # Skip the header row and load each assignment into the listbox
+        for row in sheet.iter_rows(min_row=2, values_only=True):
+            # Only add the row if it has data
+            if row[0] is not None:
+                name = row[0]
+                class_name = row[1]
+                type_name = row[2]
+                due = row[3]
+                priority = row[4]
+            assignment_list.insert(tk.END, f"{name} | {class_name} | {type_name} | Due: {due} | {priority}")
+
+        # Update the counter to match how many assignments are in the file
+        global counter
+        counter = sheet.max_row - 1
+        counter_label.config(text=f"Assignments Added: {counter}")
+
+    except FileNotFoundError:
+        # If the file doesn't exist, just start with an empty list
+        pass
+
 # Counter variable to keep track of the number of assignments added
 counter = 0
 
 # Call the function to set up the Excel file and get the workbook and sheet objects
 workbook, sheet = setup_excel()
+
 # Creating a placeholder text for the entry fields
 def add_placeholder(entry, placeholder_text):
     entry.insert(0, placeholder_text)
@@ -214,7 +241,7 @@ def submit():
         priority_box.set("")
         type_box.set("")
         notes_entry.delete(0, tk.END)
-        
+
         # Increment the counter and update the label
         counter += 1
         counter_label.config(text=f"Assignments Added: {counter}")
@@ -245,6 +272,9 @@ assignment_list.pack(side="left")
 
 # Connect scrollbar to listbox
 scrollbar.config(command=assignment_list.yview)
+
+# Load existing assignments from the Excel file when the application starts
+load_assignments()
 
 # Start the window
 window.mainloop()
