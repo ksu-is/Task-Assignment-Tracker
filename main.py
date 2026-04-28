@@ -12,7 +12,7 @@ window.title("Task/Assignment Tracker")
 window.geometry("500x850")
 window.configure(bg="#1e1e2e")
 
-# Create the function for saving assignments to an Excel file
+# Create the function to setup Excel file
 def setup_excel():
     try:
         # Try to open existing file
@@ -54,6 +54,35 @@ def setup_excel():
 
         workbook.save("assignments.xlsx")
     return workbook, sheet
+
+# Create a function to save an assignment to the Excel file
+def save_to_excel(name, class_name, type_name, due, priority, notes):
+    workbook = openpyxl.load_workbook("assignments.xlsx")
+    sheet = workbook.active
+
+    # Add the new row at the end
+    row = [name, class_name, type_name, due, priority, notes]
+    sheet.append(row)
+
+    #Find the row we just added
+    last_row = sheet.max_row
+
+    # Set color based on priority
+    if priority == "High":
+        color = "FF6B6B"
+    elif priority == "Medium":
+        color = "F5A623"
+    else:
+        color = "4ECBA1"
+    
+    # Apply the color to the entire row
+    for col in range(1, 7):
+        cell = sheet.cell(row=last_row, column=col)
+        cell.fill = PatternFill("solid", fgColor=color)
+        cell.alignment = Alignment(horizontal="center")
+    
+    workbook.save("assignments.xlsx")
+
 # Counter variable to keep track of the number of assignments added
 counter = 0
 
@@ -171,8 +200,13 @@ def submit():
         messagebox.showerror("Invalid Date", "Please enter a valid date in MM/DD/YYYY format.")
     else:
         messagebox.showinfo("Success", f"Added: {name}\nType: {type_name}\nNotes: {notes if notes else 'None'}")
+
+        # Save the assignment to the Excel file
+        save_to_excel(name, class_name, type_name, due, priority, notes)
+
         # Add the assignment to the listbox
         assignment_list.insert(tk.END, f"{name} | {class_name} | {type_name} | Due: {due} | {priority}")
+
         # Clear the fields after submission
         name_entry.delete(0, tk.END)
         class_entry.delete(0, tk.END)
@@ -180,6 +214,7 @@ def submit():
         priority_box.set("")
         type_box.set("")
         notes_entry.delete(0, tk.END)
+        
         # Increment the counter and update the label
         counter += 1
         counter_label.config(text=f"Assignments Added: {counter}")
