@@ -54,7 +54,7 @@ def setup_excel():
 
         #Add filter dropdowns to the header row
         sheet.auto_filter.ref = "A1:F1"
-        
+
         workbook.save("assignments.xlsx")
     return workbook, sheet
 
@@ -112,6 +112,40 @@ def load_assignments():
         # If the file doesn't exist, just start with an empty list
         pass
 
+# Create a function to delete the selected assignment from the listbox and the Excel file
+def delete_assignment():
+    # Check if something is selected in the Listbox
+    selected = assignment_list.curselection()
+
+    if not selected:
+        messagebox.showerror("Error", "Please select an assignment to delete.")
+        return
+    
+    # Get the index of the selected item
+    index = selected[0]
+    excel_row = index + 2  # +2 because Listbox is 0-indexed and Excel has a header row
+
+    # Ask the user to confirm deletion
+    confirm = messagebox.askyesno("Confirm Deletion", "Are you sure you want to delete the selected assignment?")
+
+    if confirm:
+        # Remove from Listbox
+        assignment_list.delete(selected[0])
+
+        # Remove from Excel
+        workbook = openpyxl.load_workbook("assignments.xlsx")
+        sheet = workbook.active
+        sheet.delete_rows(excel_row)
+        workbook.save("assignments.xlsx")
+
+        # Update counter
+        global counter
+        counter -= 1
+        counter_label.config(text=f"Assignments Added: {counter}")
+
+        messagebox.showinfo("Deleted", "Assignment deleted successfully.")
+
+        
 # Counter variable to keep track of the number of assignments added
 counter = 0
 
@@ -275,6 +309,10 @@ assignment_list.pack(side="left")
 
 # Connect scrollbar to listbox
 scrollbar.config(command=assignment_list.yview)
+
+# Delete button
+delete_button = tk.Button(window, text="Delete Selected", font=("Arial", 11, "bold"), bg="#FF6B6B", fg="black", activebackground="#cc0000", activeforeground="white", relief="flat", padx=10, pady=6, command=delete_assignment)
+delete_button.pack(pady=5)
 
 # Load existing assignments from the Excel file when the application starts
 load_assignments()
