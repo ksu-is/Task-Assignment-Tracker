@@ -11,4 +11,7 @@ This is a list of all the youtube videos I used to learn extra code to create th
     Input validation and error messages: https://www.youtube.com/watch?v=yyDdQOEJVnk
     Styling: https://www.youtube.com/watch?v=bKPqcTNsK9M 
     Listbox and Scrollbar: https://www.youtube.com/watch?v=rbuTRlEpD44
-    
+    Creating and Writing to Excel: https://www.youtube.com/watch?v=9I4ByUIMLpE 
+    Formatting Excel Cells: https://www.youtube.com/watch?v=ElBxZ9GlkNI
+    Reading Excel Files with openpyxl: https://www.youtube.com/watch?v=6-WLK8oEP5A 
+    Rows and Columns in openpyxl: https://www.youtube.com/watch?v=qnmBNNMOTL0 

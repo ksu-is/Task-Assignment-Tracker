@@ -17,7 +17,7 @@
 - [x] Use comments during code
 - [x] Review sprint 1 and make any adjustments needed for sprint 2 
 - [x] Complete sprint 2 
-- [ ] Review sprint 2 and make any adjustments needed for sprint 3
+- [x] Review sprint 2 and make any adjustments needed for sprint 3
 - [ ] Complete sprint 3
 - [ ] Adjust code description and make any changes depending on the actual final product of the code
 
