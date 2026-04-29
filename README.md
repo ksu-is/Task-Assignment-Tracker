@@ -14,4 +14,7 @@ This is a list of all the youtube videos I used to learn extra code to create th
     Creating and Writing to Excel: https://www.youtube.com/watch?v=9I4ByUIMLpE 
     Formatting Excel Cells: https://www.youtube.com/watch?v=ElBxZ9GlkNI
     Reading Excel Files with openpyxl: https://www.youtube.com/watch?v=6-WLK8oEP5A 
-    Rows and Columns in openpyxl: https://www.youtube.com/watch?v=qnmBNNMOTL0 
+    Rows and Columns in openpyxl: https://www.youtube.com/watch?v=qnmBNNMOTL0
+    Checkbutton widget: https://www.youtube.com/watch?v=TuLxsvK4svQ 
+    Showing and hiding widgets with pack_forget: https://www.youtube.com/watch?v=s0KCLD3YWRU
+    Deleting rows in openpyxl: https://www.youtube.com/watch?v=9I4ByUIMLpE 
