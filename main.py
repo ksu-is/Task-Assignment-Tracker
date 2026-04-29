@@ -52,6 +52,9 @@ def setup_excel():
         # Freeze the top row so the headers stay visible while scrolling
         sheet.freeze_panes = "A2"
 
+        #Add filter dropdowns to the header row
+        sheet.auto_filter.ref = "A1:F1"
+        
         workbook.save("assignments.xlsx")
     return workbook, sheet
 
