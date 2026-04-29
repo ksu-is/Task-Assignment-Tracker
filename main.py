@@ -25,7 +25,7 @@ def setup_excel():
         sheet.title = "Assignments"
 
         # Create header row
-        headers = ["Assignment Name", "Class", "Type", "Due Date", "Priority", "Notes"]
+        headers = ["Assignment Name", "Class", "Type", "Due Date", "Target Date", "Priority", "Notes"]
 
         # Add headers to the first row
         for col_num, header in enumerate(headers, 1):
@@ -46,25 +46,26 @@ def setup_excel():
         sheet.column_dimensions['B'].width = 15
         sheet.column_dimensions['C'].width = 15
         sheet.column_dimensions['D'].width = 15
-        sheet.column_dimensions['E'].width = 12
-        sheet.column_dimensions['F'].width = 25
+        sheet.column_dimensions['E'].width = 15
+        sheet.column_dimensions['F'].width = 12
+        sheet.column_dimensions['G'].width = 25
 
         # Freeze the top row so the headers stay visible while scrolling
         sheet.freeze_panes = "A2"
 
         #Add filter dropdowns to the header row
-        sheet.auto_filter.ref = "A1:F1"
+        sheet.auto_filter.ref = "A1:G1"
 
         workbook.save("assignments.xlsx")
     return workbook, sheet
 
 # Create a function to save an assignment to the Excel file
-def save_to_excel(name, class_name, type_name, due, priority, notes):
+def save_to_excel(name, class_name, type_name, due, target, priority, notes):
     workbook = openpyxl.load_workbook("assignments.xlsx")
     sheet = workbook.active
 
     # Add the new row at the end
-    row = [name, class_name, type_name, due, priority, notes]
+    row = [name, class_name, type_name, due, target, priority, notes]
     sheet.append(row)
 
     #Find the row we just added
@@ -100,8 +101,10 @@ def load_assignments():
                 class_name = row[1]
                 type_name = row[2]
                 due = row[3]
-                priority = row[4]
-            assignment_list.insert(tk.END, f"{name} | {class_name} | {type_name} | Due: {due} | {priority}")
+                target = row[4]
+                priority = row[5]
+                notes = row[6]
+            assignment_list.insert(tk.END, f"{name} | {class_name} | {type_name} | Due: {due} | Target: {target} | {priority}")
 
         # Update the counter to match how many assignments are in the file
         global counter
@@ -145,9 +148,12 @@ def delete_assignment():
 
         messagebox.showinfo("Deleted", "Assignment deleted successfully.")
 
-        
+
 # Counter variable to keep track of the number of assignments added
 counter = 0
+
+# Add checkbox variable
+show_target = tk.IntVar()
 
 # Call the function to set up the Excel file and get the workbook and sheet objects
 workbook, sheet = setup_excel()
@@ -169,6 +175,16 @@ def add_placeholder(entry, placeholder_text):
 
     entry.bind("<FocusIn>", on_click)
     entry.bind("<FocusOut>", on_leave)
+
+# Create the toggle function for the target completion date field
+def toggle_target():
+    if show_target.get() == 1:
+        target_label.pack(after=target_check)
+        target_entry.pack(after=target_label, pady=5)
+        add_placeholder(target_entry, "e.g. 5/1/2026")
+    else:
+        target_label.pack_forget()
+        target_entry.pack_forget()
 
 # Create a function to make sure the date is valid
 def is_valid_date(date_str):
@@ -244,6 +260,13 @@ notes_entry = tk.Entry(window, font=("Arial", 12), width=30, bg="#2e2e3e", fg="w
 notes_entry.pack(pady=5)
 add_placeholder(notes_entry, "e.g. Chapters 5-7")
 
+# Target completion date checkbox
+target_check = tk.Checkbutton(window, text="Set Target Completion Date?", font=("Arial", 11), bg="#1e1e2e", fg="white", selectcolor="#2e2e3e", activebackground="#1e1e2e", activeforeground="white", variable=show_target, command=toggle_target)
+target_check.pack(pady=5)
+
+# Target date field (hidden by default)
+target_label = tk.Label(window, text="Target Completion Date (MM/DD/YYYY):", font=("Arial", 12), bg="#1e1e2e", fg="white")
+target_entry = tk.Entry(window, font=("Arial", 12), width=30, bg="#2e2e3e", fg="white", insertbackground="white")
 # Submit function
 def submit():
     global counter
@@ -257,19 +280,28 @@ def submit():
         notes = ""
     type_name = type_box.get()
 
+    if show_target.get() == 1:
+        target = target_entry.get()
+        if target == "e.g. 5/1/2026":
+            target = ""
+    else:
+        target = ""
+
     # Make sure nothing is empty
     if name == "" or name == "e.g. Math Homework 5" or class_name == "" or class_name == "e.g. Math 101" or due == "" or due == "e.g. 4/27/2026" or priority == "" or type_name == "":
         messagebox.showerror("Error", "Please fill in all fields.")
     elif not is_valid_date(due):
         messagebox.showerror("Invalid Date", "Please enter a valid date in MM/DD/YYYY format.")
+    elif show_target.get() == 1 and not is_valid_date(target_entry.get()):
+        messagebox.showerror("Invalid Target Date", "Please enter a valid target completion date in MM/DD/YYYY format.")
     else:
         messagebox.showinfo("Success", f"Added: {name}\nType: {type_name}\nNotes: {notes if notes else 'None'}")
 
         # Save the assignment to the Excel file
-        save_to_excel(name, class_name, type_name, due, priority, notes)
+        save_to_excel(name, class_name, type_name, due, target, priority, notes)
 
         # Add the assignment to the listbox
-        assignment_list.insert(tk.END, f"{name} | {class_name} | {type_name} | Due: {due} | {priority}")
+        assignment_list.insert(tk.END, f"{name} | {class_name} | {type_name} | Due: {due} | Target: {target} | {priority}")
 
         # Clear the fields after submission
         name_entry.delete(0, tk.END)
@@ -278,6 +310,12 @@ def submit():
         priority_box.set("")
         type_box.set("")
         notes_entry.delete(0, tk.END)
+
+        if show_target.get() == 1:
+            target_entry.delete(0, tk.END)
+            target_check.deselect()
+            target_label.pack_forget()
+            target_entry.pack_forget()
 
         # Increment the counter and update the label
         counter += 1
