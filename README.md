@@ -1,5 +1,5 @@
 # Task-Assignment-Tracker
-This code will allow the user to create tasks/assignments with many features such as due date, priority, class, etc. and be able to manage and check off tasks as they complete them. This will help the user manage their tasks/assignments better to complete everything on time.
+A desktop app built with Python and tkinter that helps students organize and track their assignments. Add assignments with details like class, type, priority, due date, and notes, and watch them automatically save to a color-coded Excel spreadsheet. With built-in date validation, a live assignment counter, and the ability to load and delete entries. Assignment Tracker keeps your academic workload organized and accessible.
 I want to give credit to Kaitlyn Morgan and her repository https://github.com/ksu-is/assignment_tracker which I am using as a reference for my code and gave me the idea to save the assignments to an excel spreadsheet.
 This is a list of all the youtube videos I used to learn extra code to create this project:
     Creating a window: https://www.youtube.com/watch?v=TuLxsvK4svQ 
